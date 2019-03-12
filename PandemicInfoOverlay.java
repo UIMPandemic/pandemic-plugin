@@ -51,25 +51,15 @@ import static net.runelite.client.ui.overlay.OverlayManager.OPTION_CONFIGURE;
 class PandemicInfoOverlay extends Overlay
 {
 	private final PandemicPlugin plugin;
-	private final PandemicConfig config;
-
-	private final PanelComponent panelComponent = new PanelComponent();
-
 
 	private InfoBoxManager infoBoxManager;
 
 	private final ItemManager itemManager;
-	private final Client client;
 
 
 	private Counter counter;
 	private Counter regionCounter;
 
-	private BufferedImage getImage(Item item)
-	{
-		ItemComposition itemComposition = itemManager.getItemComposition(ItemID.LEATHER_BOOTS);
-		return itemManager.getImage(item.getId(), item.getQuantity(), itemComposition.isStackable());
-	}
 
 	@Inject
 	private PandemicInfoOverlay(PandemicPlugin plugin, PandemicConfig config, Client client, ItemManager itemManager, InfoBoxManager infoBoxManager)
@@ -78,8 +68,6 @@ class PandemicInfoOverlay extends Overlay
 		setPosition(OverlayPosition.TOP_LEFT);
 		setPriority(OverlayPriority.HIGHEST);
 		this.plugin = plugin;
-		this.config = config;
-		this.client = client;
 		this.itemManager = itemManager;
 		this.infoBoxManager = infoBoxManager;
 		getMenuEntries().add(new OverlayMenuEntry(RUNELITE_OVERLAY_CONFIG, OPTION_CONFIGURE, "Pandemic overlay"));
@@ -89,8 +77,6 @@ class PandemicInfoOverlay extends Overlay
 	public Dimension render(Graphics2D graphics)
 	{
 
-
-
 		if (counter != null && !plugin.inPandemicSession()){
 			infoBoxManager.removeInfoBox(counter);
 			infoBoxManager.removeInfoBox(regionCounter);
@@ -99,23 +85,8 @@ class PandemicInfoOverlay extends Overlay
 		}
 		if(plugin.inPandemicSession()) {
 
-
 			int itemSpriteId = ItemID.LEATHER_BOOTS;
 
-			//final ItemContainer itemContainer = client.getItemContainer(InventoryID.EQUIPMENT);
-			//final Item[] items = itemContainer.getItems();
-
-			//if (items.length > 1) {
-			//	Item item = items[items.length - 2];
-			//	if (item.getId() != -1) itemSpriteId = item.getId();
-
-			//}
-
-
-			//Color col = Color.WHITE;
-			//if(!plugin.getSession().canGainSteps(plugin.getCurrentRegion())){
-			//	col = Color.RED;
-			//}
 			if(counter == null) {
 				BufferedImage image = itemManager.getImage(itemSpriteId);
 				BufferedImage scroll = itemManager.getImage(ItemID.CLUE_SCROLL_EASY_2678);

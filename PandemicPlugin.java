@@ -210,7 +210,7 @@ public class PandemicPlugin extends Plugin
 				if(getSession() == null) startPandemicSession(); //this happens if we update the configuration (changing safety without a move)
 				getSession().incrementStepCount(distanceInTick, from.getRegionID());
 			}else{
-				//Teleport or other movement
+				//Teleport or other big movement
 				if(distanceInTick > 20) {
 					stopPandemicSession();
 					startPandemicSession();
@@ -244,9 +244,6 @@ public class PandemicPlugin extends Plugin
 		overlayManager.add(pandemicFlickeringOverlay);
 		overlayManager.add(pandemicTileIndicatorsOverlay);
 		overlayManager.add(pandemicDarknessOverlay);
-		//client.getScene().setDrawDistance(0);
-		//TODO use for alert client.getLocalDestinationLocation()
-		//overlayManager.add(pandemicFlickeringOverlay);
 	}
 
 	protected void stopPandemicSession(){
@@ -256,7 +253,6 @@ public class PandemicPlugin extends Plugin
 		overlayManager.remove(pandemicFlickeringOverlay);
 		overlayManager.remove(pandemicTileIndicatorsOverlay);
 		overlayManager.remove(pandemicDarknessOverlay);
-		//overlayManager.remove(pandemicFlickeringOverlay);
 	}
 
 

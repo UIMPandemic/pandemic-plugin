@@ -24,9 +24,6 @@ public class PandemicFlickeringOverlay extends Overlay {
 	private final int DEFAULT_RANGE = 20;
 	private final int DEFAULT_MIN = 20;
 	private final double DEFAULT_FLICKER = 0.4;
-	private final int ALERT_RANGE = 50;
-	private final int ALERT_MIN = 30;
-	private final double ALERT_FLICKER = 1.5;
 
 
 	@Getter
@@ -60,24 +57,7 @@ public class PandemicFlickeringOverlay extends Overlay {
     @Override
     public Dimension render(Graphics2D graphics) {
 		if(config.flickerEnabled()) {
-			PandemicSession session = plugin.getSession();
-
-			//if(session.isAlert()){
-			///	minAlpha = ALERT_MIN;
-			//	flickerSpeed = ALERT_FLICKER;
-			//	range = ALERT_RANGE;
-			//} else {
-			//	minAlpha = DEFAULT_MIN;
-			//	flickerSpeed = DEFAULT_FLICKER;
-			//	range = DEFAULT_RANGE;
-			//}
-
-			//if(session.getAllowedSteps() == 0){
-			//	minAlpha = 75;
-			//	maxAlpha = 95;
-			//}
 			double maxAlpha = minAlpha + range;
-
 			alpha += flickerSpeed;
 
 			if (alpha >= maxAlpha || alpha <= minAlpha) flickerSpeed = -flickerSpeed;
